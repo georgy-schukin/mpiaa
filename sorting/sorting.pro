@@ -4,8 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    sort.cpp
+    sort.cpp \
+    main.cpp
 
 HEADERS += \
-    sort.h
+    birth_date.h \
+    file_io.h \
+    sort.h \
+    person.h
 
