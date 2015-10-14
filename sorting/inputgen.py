@@ -43,8 +43,8 @@ def generate_records(names, surnames, num):
 def main():
 	start = int(sys.argv[1]) if len(sys.argv) > 1 else 3
 	end = int(sys.argv[2]) if len(sys.argv) > 2 else 6
-	names = read_file("names.txt")
-	surnames = read_file("surnames.txt")	
+	names = read_file("../common/names.txt")
+	surnames = read_file("../common/surnames.txt")	
 	for p in range(start, end + 1):
 		num = 10**p
 		output_file = "input_1e{0}.txt".format(p)
