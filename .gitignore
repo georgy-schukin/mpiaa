@@ -29,3 +29,6 @@
 
 # Qt stuff
 *.user
+
+# Python
+*.pyc
