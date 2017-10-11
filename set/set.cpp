@@ -1,7 +1,11 @@
 #include "set.h"
 
 TreeNode::TreeNode() :
-	left(nullptr), right(nullptr) {
+	item(0), left(nullptr), right(nullptr) {
+}
+
+TreeNode::TreeNode(int item) :
+	item(item), left(nullptr), right(nullptr) {
 }
 
 TreeNode::~TreeNode() {
@@ -23,12 +27,15 @@ Set::~Set() {
 	}
 }
 
-bool set_find(Set *s, int item) {
+// Methods to implement
+
+bool Set::find(int item) const {
 	return false;
 }
 
-void set_insert(Set *s, int item) {
+void Set::insert(int item) {
 }
 
-int set_size(Set *s) {
+int Set::size() const {
+	return 0;
 }
