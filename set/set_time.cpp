@@ -9,7 +9,7 @@
 std::vector<int> gen_random_array(int size) {
 	std::vector<int> result(size);
 	for (int i = 0; i < size; i++) {
-		result[i] = rand();		
+		result[i] = rand() % size;		
 	}
 	return result;
 }
@@ -37,7 +37,7 @@ int set_search(const Set &s, const std::vector<int> &keys) {
 
 void measure(int size, int num_of_keys) {	
 	const auto data = gen_random_array(size);
-	const auto keys = gen_random_array(keys);	
+	const auto keys = gen_random_array(num_of_keys);	
 		
 	auto t1 = std::chrono::high_resolution_clock::now();
 	int lin_found = linear_search(data, keys);
