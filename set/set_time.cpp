@@ -6,11 +6,43 @@
 
 #include "set.h"
 
+typedef std::chrono::high_resolution_clock hrc;
+
+namespace {
+    class Timer {
+    public:
+        Timer() {}
+
+        void start() {
+            begin = hrc::now();
+        }
+
+        double getTime() {
+	        auto end = hrc::now();		
+	        return std::chrono::duration<double>(end - begin).count();	
+        }
+
+    private:
+        hrc::time_point begin;
+    };
+}
+
 std::vector<int> gen_random_array(int size) {
 	std::vector<int> result(size);
 	for (int i = 0; i < size; i++) {
-		result[i] = rand() % size;		
+		result[i] = rand() % size;
 	}
+    return result;
+}
+
+std::vector<int> gen_shuffled_array(int size) {
+	std::vector<int> result(size);
+	for (int i = 0; i < size; i++) {
+		result[i] = i;
+	}
+    for (int i = 0; i < size; i++) {
+        std::swap(result[rand() % size], result[rand() % size]);
+    }
 	return result;
 }
 
@@ -36,23 +68,23 @@ int set_search(const Set &s, const std::vector<int> &keys) {
 }
 
 void measure(int size, int num_of_keys) {	
-	const auto data = gen_random_array(size);
-	const auto keys = gen_random_array(num_of_keys);	
+    const auto data = gen_shuffled_array(size);
+    const auto keys = gen_random_array(num_of_keys);
+
+    Timer t;
 		
-	auto t1 = std::chrono::high_resolution_clock::now();
+	t.start();
 	int lin_found = linear_search(data, keys);
-	auto t2 = std::chrono::high_resolution_clock::now();		
-	double lin_time = std::chrono::duration<double>(t2 - t1).count();	
+	double lin_time = t.getTime();
 	
 	Set s;
 	for (const auto &item: data) {
 		s.insert(item);
 	}
 	
-	t1 = std::chrono::high_resolution_clock::now();
+    t.start();
 	int set_found = set_search(s, keys);
-	t2 = std::chrono::high_resolution_clock::now();		
-	double set_time = std::chrono::duration<double>(t2 - t1).count();	
+	double set_time = t.getTime();
 	
 	printf("N: %d, keys: %d, lin. search time: %.5f sec (%d found), set search time: %.5f (%d found)\n", 
 		size, num_of_keys, lin_time, lin_found, set_time, set_found);

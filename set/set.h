@@ -23,10 +23,10 @@ public:
 	Set();
 	~Set();
 	
-	/// Check if the number is in the set.
+	/// Check if item is in the set.
 	bool find(int item) const;
 	
-	/// Insert number into the set.
+	/// Insert item into the set.
 	void insert(int item);
 	
 	/// Get size of the set.
