@@ -49,9 +49,31 @@ TEST_CASE( "Duplicate values" ) {
 
 TEST_CASE( "Case sensitive" ) {    
     Dictionary d;
-    d.set("big", "largo");
+    d.set("big", "grande");
     d.set("BIG", "GRANDE");
     CHECK( d.size() == 2 );
-    CHECK( d.get("big") == "largo" );
+    CHECK( d.get("big") == "grande" );
     CHECK( d.get("BIG") == "GRANDE" );
+}
+
+TEST_CASE( "Anagrams" ) {    
+    Dictionary d;
+    d.set("abc", "uno");
+    d.set("bac", "dos");
+    d.set("cba", "tres");
+    CHECK( d.size() == 3 );
+    CHECK( d.get("abc") == "uno" );
+    CHECK( d.get("bac") == "dos" );
+    CHECK( d.get("cba") == "tres" );
+}
+
+TEST_CASE( "Same first letter" ) {    
+    Dictionary d;
+    d.set("hello", "hola");
+    d.set("house", "casa");
+    d.set("human", "humano");
+    CHECK( d.size() == 3 );
+    CHECK( d.get("hello") == "hola" );
+    CHECK( d.get("house") == "case" );
+    CHECK( d.get("human") == "humano" );
 }

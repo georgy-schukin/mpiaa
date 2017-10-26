@@ -20,4 +20,7 @@ public:
     
     /// Get number of items (keys) in the dictionary.
     int size() const;
+
+private:
+    // Add private methods and fields here.
 };

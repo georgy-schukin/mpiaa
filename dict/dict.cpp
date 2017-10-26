@@ -10,10 +10,8 @@ Dictionary::~Dictionary() {
     // Delete inner data structures here.
 }
 
-
-
 void Dictionary::set(const std::string &key, const std::string &value) {
-    // Insert key->value pair into the dictionary.
+    // Insert key-value pair into the dictionary.
     // If such key already exists, replace old value with the new one.
 }
 
@@ -24,6 +22,6 @@ std::string Dictionary::get(const std::string &key) const {
 }
 
 int Dictionary::size() const {
-    // Return size (number of keys) of the dictionary.
+    // Return size of the dictionary, i.e. number of key-value pairs.
     return 0;
 }
