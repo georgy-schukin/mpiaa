@@ -74,6 +74,6 @@ TEST_CASE( "Same first letter" ) {
     d.set("human", "humano");
     CHECK( d.size() == 3 );
     CHECK( d.get("hello") == "hola" );
-    CHECK( d.get("house") == "case" );
+    CHECK( d.get("house") == "casa" );
     CHECK( d.get("human") == "humano" );
 }
