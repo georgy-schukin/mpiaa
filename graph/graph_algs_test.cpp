@@ -48,3 +48,14 @@ TEST_CASE( "Disconnected graph" ) {
     CHECK_FALSE( is_connected(g) );
 }
 
+TEST_CASE( "Path in null graph" ) {
+    Graph g;    
+    CHECK_FALSE( path_exists(g, 0, 1) );
+}
+
+TEST_CASE( "Path in singleton graph" ) {
+    Graph g;    
+    g.add_vertex(0);
+    CHECK( path_exists(g, 0, 0) );
+}
+
