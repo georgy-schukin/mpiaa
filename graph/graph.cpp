@@ -7,8 +7,12 @@ void Graph::add_vertex(int vertex) {
 }
 
 void Graph::add_edge(int start_vertex, int end_vertex) {
-    vertices[start_vertex].insert(end_vertex);
-    vertices[end_vertex].insert(start_vertex);
+    if (start_vertex != end_vertex) {
+        vertices[start_vertex].insert(end_vertex);
+        vertices[end_vertex].insert(start_vertex);
+    } else {
+        add_vertex(start_vertex);
+    }
 }
 
 std::vector<int> Graph::get_vertices() const {

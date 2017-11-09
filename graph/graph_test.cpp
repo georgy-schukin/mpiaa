@@ -11,13 +11,13 @@ bool is_in(const T &container, const U &elem) {
     return (std::find(container.begin(), container.end(), elem) != container.end());
 }
 
-TEST_CASE( "Empty graph" ) {
+TEST_CASE( "Empty graph", "[graph]" ) {
     Graph g;
     CHECK_FALSE( g.has_vertex(0) );
     CHECK_FALSE( g.has_edge(0, 1) );
 }
 
-TEST_CASE( "One vertex" ) {
+TEST_CASE( "One vertex", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     CHECK( g.has_vertex(0) );
@@ -25,7 +25,7 @@ TEST_CASE( "One vertex" ) {
     CHECK_FALSE( g.has_edge(0, 1) );
 }
 
-TEST_CASE( "Two vertices" ) {
+TEST_CASE( "Two vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_vertex(1);
@@ -34,7 +34,7 @@ TEST_CASE( "Two vertices" ) {
     CHECK_FALSE( g.has_edge(0, 1) );
 }
 
-TEST_CASE( "Edge" ) {
+TEST_CASE( "Edge", "[graph]" ) {
     Graph g;
     g.add_edge(0, 1);
     CHECK( g.has_vertex(0) );
@@ -44,7 +44,17 @@ TEST_CASE( "Edge" ) {
     CHECK_FALSE( g.has_edge(0, 0) );
 }
 
-TEST_CASE( "Two edges" ) {
+TEST_CASE( "Loops are not allowed", "[graph]" ) {
+    Graph g;
+    g.add_edge(0, 0);
+    g.add_edge(1, 1);
+    CHECK( g.has_vertex(0) );
+    CHECK( g.has_vertex(1) );
+    CHECK_FALSE( g.has_edge(0, 0) );
+    CHECK_FALSE( g.has_edge(1, 1) );
+}
+
+TEST_CASE( "Two edges", "[graph]" ) {
     Graph g;
     g.add_edge(0, 1);
     g.add_vertex(3);
@@ -57,7 +67,7 @@ TEST_CASE( "Two edges" ) {
     CHECK_FALSE( g.has_edge(1, 3) );
 }
 
-TEST_CASE( "Get vertices" ) {
+TEST_CASE( "Get vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_edge(0, 1);
@@ -69,7 +79,7 @@ TEST_CASE( "Get vertices" ) {
     CHECK( is_in(vert, 3) );
 }
 
-TEST_CASE( "Get adjacent vertices" ) {
+TEST_CASE( "Get adjacent vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_edge(0, 1);
