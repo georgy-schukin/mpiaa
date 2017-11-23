@@ -5,7 +5,7 @@
 #include <cstdio>
 
 #include "graph.h"
-#include "graph_algs.h"
+#include "graph_algs_2.h"
 
 typedef std::chrono::high_resolution_clock hrc;
 
@@ -35,16 +35,24 @@ Graph gen_random_graph(int size) {
     return g;
 }
 
-void measure(int size) {    
+void measure(int size) {
     const auto g = gen_random_graph(size);
 
     Timer t;
         
     t.start();
-    bool is_conn = is_connected(g);
-    double time = t.getTime();
+    const auto comps = connected_components(g);
+    double cc_time = t.getTime();
+
+    t.start();
+    const int repeats = 100;
+    for (int i = 0; i < repeats; i++) {
+        const auto path = shortest_path(g, rand() % size, rand() % size);
+    }
+    double sp_time = t.getTime() / repeats;
     
-    printf("N: %8d, time: %10.5f sec (%s)\n", size, time, (is_conn ? "connected" : "not connected"));
+    printf("N: %8d, cc time: %10.5f sec, sp time: %10.5f sec (%d components)\n", 
+        size, cc_time, sp_time, (int)comps.size());
 }
 
 int main() {
