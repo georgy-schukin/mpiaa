@@ -54,7 +54,7 @@ void measure(const std::string &alphabet, int size, int num_of_passwords) {
 
 int main() {
     for (int i = 1; i < 6; i++) {
-        measure("abcd1234", i, 100);
+        measure("abcd1234", i, 1000);
     }
     return 0;
 }
