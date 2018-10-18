@@ -1,48 +1,52 @@
 #include "set.h"
 
-TreeNode::TreeNode() :
-    item(0), left(nullptr), right(nullptr) {
-}
+// Node of a binary tree.
+struct TreeNode {
+    int item;
+    TreeNode *left;
+    TreeNode *right;
+       
+    TreeNode() : item(0), left(nullptr), right(nullptr) {}
+    TreeNode(int item) : item(item), left(nullptr), right(nullptr) {}
+};
 
-TreeNode::TreeNode(int item) :
-    item(item), left(nullptr), right(nullptr) {
-}
-
-TreeNode::~TreeNode() {
-    if (left) {
-        delete left;
+// Auxilary functions
+void tree_delete(TreeNode *node) {
+    if (!node) {
+        return;
     }
-    if (right) {
-        delete right;
-    }
+    tree_delete(node->left);
+    tree_delete(node->right);
+    delete node;
 }
 
+int tree_size(const TreeNode *node) {
+    if (!node) {
+        return 0;
+    }
+    return 1 + tree_size(node->left) + tree_size(node->right);
+}
+
+// Set methods
 Set::Set() :
     root(nullptr) {
 }
 
 Set::~Set() {
-    if (root) {
-        delete root;
-    }
+    tree_delete(root);
 }
 
-// Methods to implement
+int Set::size() const {
+    // Return size (number of items) of the set.
+    return tree_size(root);
+}
 
 void Set::insert(int item) {
     // Insert item into the set.
-    // If the item is in the set already, do nothing.
-    // To create new node: TreeNode *new_node = new TreeNode(item);
-    // To init tree: root = new_node;
-    // To insert new node: some_node->left = new_node; or some_node->right = new_node;
+    // If item is in the set already, do nothing.
 }
 
 bool Set::find(int item) const {
     // Return true if item is in the set, false otherwise.
     return false;
-}
-
-int Set::size() const {
-    // Return size (number of items) of the set.
-    return 0;
 }

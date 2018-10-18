@@ -39,9 +39,7 @@ std::vector<int> gen_shuffled_array(int size) {
     for (int i = 0; i < size; i++) {
         result[i] = i;
     }
-    for (int i = 0; i < size; i++) {
-        std::swap(result[rand() % size], result[rand() % size]);
-    }
+    std::random_shuffle(result.begin(), result.end());    
     return result;
 }
 
@@ -83,7 +81,7 @@ void measure(int size, int num_of_keys) {
     
     t.start();
     int set_found = set_search(s, keys);
-    double set_time = t.getTime();
+    double set_time = t.getTime();       
     
     printf("N: %d, keys: %d, lin. search time: %.5f sec (%d found), set search time: %.5f (%d found)\n", 
         size, num_of_keys, lin_time, lin_found, set_time, set_found);
@@ -91,7 +89,7 @@ void measure(int size, int num_of_keys) {
 
 int main() {
     for (int i = 1; i < 6; i++) {
-        measure(pow(10, i), 1000);
+        measure(pow(10, i), 10000);
     }
     return 0;
 }
