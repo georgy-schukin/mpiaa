@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include "../catch.hpp"
 
 #include "graph_algs_2.h"
 
