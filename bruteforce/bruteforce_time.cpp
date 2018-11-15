@@ -34,13 +34,12 @@ std::string gen_random_str(const std::string &alphabet, int size) {
     return result;
 }
 
-void measure(const std::string &alphabet, int size, int num_of_passwords) {
-
+void measure(const std::string &alphabet, int size, int passwords_num) {
     Timer t;
     int cracked_num = 0;    
         
     t.start();
-    for (int i = 0; i < num_of_passwords; i++) {
+    for (int i = 0; i < passwords_num; i++) {
         const auto password = gen_random_str(alphabet, std::max(1, rand() % size));
         const auto cracked = bruteforce(alphabet, size, sha256(password));
         if (password == cracked) {
@@ -49,12 +48,12 @@ void measure(const std::string &alphabet, int size, int num_of_passwords) {
     }
     double time = t.getTime();
     
-    printf("N: %d, time: %.5f sec (cracked %d)\n", size, time, cracked_num);
+    printf("N: %d, time: %.5f sec (cracked %d from %d)\n", size, time, cracked_num, passwords_num);
 }
 
 int main() {
     for (int i = 1; i < 6; i++) {
-        measure("abcd1234", i, 1000);
+        measure("abcde12345", i, 1000);
     }
     return 0;
 }

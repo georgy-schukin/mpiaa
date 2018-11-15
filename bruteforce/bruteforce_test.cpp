@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
+#include "../catch.hpp"
 
 #include "bruteforce.h"
 #include "sha256.h"
@@ -16,7 +16,7 @@ namespace {
         // Convert back to vectors to enable pretty print in Catch. 
         typename std::vector<T> vm1(s1.begin(), s1.end());
         typename std::vector<T> vm2(s2.begin(), s2.end());
-        CHECK ( vm1 == vm2);
+        CHECK ( vm1 == vm2 );
     }
 }
 
