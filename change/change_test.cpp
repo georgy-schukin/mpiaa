@@ -28,8 +28,9 @@ TEST_CASE( "Several denominations, many coins", "[get_change]" ) {
     REQUIRE( sorted(get_change({1, 2, 3}, 5)) == sorted({3, 2}) );
 }
 
-TEST_CASE( "Several denominations, many coins 2", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 2, 3}, 7)) == sorted({3, 3, 1}) );
+TEST_CASE( "Several denominations, several solutions", "[get_change]" ) {
+    const auto answer = sorted(get_change({1, 2, 3}, 7));
+    REQUIRE( (answer == sorted({3, 3, 1}) || answer == sorted({2, 2, 3})) );
 }
 
 TEST_CASE( "Greedy must fail", "[get_change]" ) {
