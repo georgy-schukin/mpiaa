@@ -7,16 +7,16 @@ class Set {
 public:
     Set();
     ~Set();
+    
+    /// Insert the element into the set.
+    void insert(int elem);
+    
+    /// Check if the element is in the set.
+    bool find(int elem) const;    
 
     /// Get size of the set.
     int size() const;
-    
-    /// Insert item into the set.
-    void insert(int item);
-    
-    /// Check if item is in the set.
-    bool find(int item) const;    
            
 private:    
-    struct TreeNode *root;
+    // Private members go here.
 };
