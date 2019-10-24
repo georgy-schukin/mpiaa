@@ -1,5 +1,3 @@
-#define CATCH_CONFIG_MAIN 
-
 #include "../catch.hpp"
 
 #include "graph.h"
@@ -14,13 +12,13 @@ bool is_equal(const Container &c1, const Container &c2) {
     return s1 == s2;
 }
 
-TEST_CASE( "Empty graph", "[graph]" ) {
+TEST_CASE( "[Graph] Empty graph", "[graph]" ) {
     Graph g;
     CHECK_FALSE( g.has_vertex(0) );
     CHECK_FALSE( g.has_arc(0, 1) );
 }
 
-TEST_CASE( "One vertex", "[graph]" ) {
+TEST_CASE( "[Graph] One vertex", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     CHECK( g.has_vertex(0) );
@@ -28,7 +26,7 @@ TEST_CASE( "One vertex", "[graph]" ) {
     CHECK_FALSE( g.has_arc(0, 1) );
 }
 
-TEST_CASE( "Two vertices", "[graph]" ) {
+TEST_CASE( "[Graph] Two vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_vertex(1);
@@ -37,7 +35,7 @@ TEST_CASE( "Two vertices", "[graph]" ) {
     CHECK_FALSE( g.has_arc(0, 1) );
 }
 
-TEST_CASE( "Arc", "[graph]" ) {
+TEST_CASE( "[Graph] Arc", "[graph]" ) {
     Graph g;
     g.add_arc(0, 1);
     CHECK( g.has_vertex(0) );
@@ -47,7 +45,7 @@ TEST_CASE( "Arc", "[graph]" ) {
     CHECK_FALSE( g.has_arc(0, 0) );
 }
 
-TEST_CASE( "Loop", "[graph]" ) {
+TEST_CASE( "[Graph] Loop", "[graph]" ) {
     Graph g;
     g.add_arc(0, 0);
     g.add_arc(1, 1);
@@ -57,7 +55,7 @@ TEST_CASE( "Loop", "[graph]" ) {
     CHECK( g.has_arc(1, 1) );
 }
 
-TEST_CASE( "Two arcs", "[graph]" ) {
+TEST_CASE( "[Graph] Two arcs", "[graph]" ) {
     Graph g;
     g.add_arc(0, 1);
     g.add_arc(0, 3);
@@ -71,7 +69,7 @@ TEST_CASE( "Two arcs", "[graph]" ) {
     CHECK_FALSE( g.has_arc(1, 3) );
 }
 
-TEST_CASE( "Get vertices", "[graph]" ) {
+TEST_CASE( "[Graph] Get vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_arc(0, 1);
@@ -79,7 +77,7 @@ TEST_CASE( "Get vertices", "[graph]" ) {
     CHECK( is_equal(g.get_vertices(), {0, 1, 3} ));
 }
 
-TEST_CASE( "Get adjacent vertices", "[graph]" ) {
+TEST_CASE( "[Graph] Get adjacent vertices", "[graph]" ) {
     Graph g;
     g.add_vertex(0);
     g.add_arc(0, 1);
