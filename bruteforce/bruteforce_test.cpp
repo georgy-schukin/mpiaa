@@ -1,4 +1,3 @@
-#define CATCH_CONFIG_MAIN
 #include "../catch.hpp"
 
 #include "bruteforce.h"
@@ -8,15 +7,12 @@
 
 namespace {
     template <class T>
-    void check_matched(const typename std::vector<T> &v1, const typename std::vector<T> &v2) {
-        CHECK ( v1.size() == v2.size() );        
+    void check_matched(const typename std::vector<T> &result, const typename std::vector<T> &expected) {
+        CHECK ( result.size() == expected.size() );             
         // Sort and remove duplicates by converting to sets.
-        typename std::set<T> s1(v1.begin(), v1.end());
-        typename std::set<T> s2(v2.begin(), v2.end());
-        // Convert back to vectors to enable pretty print in Catch. 
-        typename std::vector<T> vm1(s1.begin(), s1.end());
-        typename std::vector<T> vm2(s2.begin(), s2.end());
-        CHECK ( vm1 == vm2 );
+        typename std::set<T> result_s(result.begin(), result.end());
+        typename std::set<T> expected_s(expected.begin(), expected.end());
+        CHECK ( result_s == expected_s );
     }
 }
 
