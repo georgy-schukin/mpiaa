@@ -13,39 +13,42 @@ std::vector<int> sorted(const std::vector<int> &v) {
 }
 
 TEST_CASE( "Zero amount", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1}, 0)) == sorted({}) );
+    CHECK( sorted(get_change({1}, 0)) == sorted({}) );
 }
 
 TEST_CASE( "One denomination", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1}, 3)) == sorted({1, 1, 1}) );
+    CHECK( sorted(get_change({1}, 3)) == sorted({1, 1, 1}) );
 }
 
 TEST_CASE( "Several denominations", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 2, 3}, 3)) == sorted({3}) );
+    CHECK( sorted(get_change({2, 3, 4}, 3)) == sorted({3}) );
 }
 
 TEST_CASE( "Several denominations, many coins", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 2, 3}, 5)) == sorted({3, 2}) );
+    CHECK( sorted(get_change({3, 2, 4}, 5)) == sorted({3, 2}) );
 }
 
 TEST_CASE( "Several denominations, several solutions", "[get_change]" ) {
     const auto answer = sorted(get_change({1, 2, 3}, 7));
-    REQUIRE( (answer == sorted({3, 3, 1}) || answer == sorted({2, 2, 3})) );
+    CHECK( (answer == sorted({3, 3, 1}) || answer == sorted({2, 2, 3})) );
 }
 
 TEST_CASE( "Greedy must fail", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 4, 6}, 8)) == sorted({4, 4}) );
+    CHECK( sorted(get_change({6, 1, 4}, 8)) == sorted({4, 4}) );
 }
 
 TEST_CASE( "Greedy works too", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 5, 10}, 27)) == sorted({10, 10, 5, 1, 1}) );
+    CHECK( sorted(get_change({1, 5, 10}, 27)) == sorted({10, 10, 5, 1, 1}) );
 }
 
 TEST_CASE( "Greedy works too 2", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 2, 5, 10}, 27)) == sorted({10, 10, 5, 2}) );
+    CHECK( sorted(get_change({2, 5, 1, 10}, 27)) == sorted({10, 10, 5, 2}) );
 }
 
 TEST_CASE( "Greedy works again", "[get_change]" ) {
-    REQUIRE( sorted(get_change({1, 5, 9}, 27)) == sorted({9, 9, 9}) );
+    CHECK( sorted(get_change({9, 5, 1}, 27)) == sorted({9, 9, 9}) );
 }
 
+TEST_CASE( "Greedy fails again", "[get_change]" ) {
+    CHECK( sorted(get_change({1, 6, 9}, 30)) == sorted({6, 6, 9, 9}) );
+}
