@@ -51,4 +51,7 @@ TEST_CASE( "Greedy works again", "[get_change]" ) {
 
 TEST_CASE( "Greedy fails again", "[get_change]" ) {
     CHECK( sorted(get_change({1, 6, 9}, 30)) == sorted({6, 6, 9, 9}) );
+    
+TEST_CASE( "Greedy trap", "[get_change]" ) {
+    CHECK( sorted(get_change({3, 5, 6}, 13)) == sorted({5, 5, 3}) );    
 }
