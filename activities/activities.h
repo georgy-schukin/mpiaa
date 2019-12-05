@@ -4,16 +4,14 @@
 
 class Activity {
 public:
-    Activity() = default;
-    Activity(const Activity&) = default;
+    Activity() = default;        
     Activity(int start, int finish) :
         start(start), finish(finish) {
-    }
-    ~Activity() = default;
+    }    
 
 public:
-    int start;
-    int finish;
+    int start {0};
+    int finish {0};
 };
 
 // Get a maximum-size subset of mutually compatible activities.
