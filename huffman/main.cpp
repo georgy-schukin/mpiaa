@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-    const auto *tree = buildTree();
+    HuffmanCoder coder {};
     while (true) {
         std::cout << "Input the string to encode: ";
         std::string input;
@@ -12,13 +12,14 @@ int main() {
             break;
         }
         try {
-            auto encoded = encode(tree, input);
+            auto encoded = coder.encode(input);
             std::cout << "Encoded string is: " << encoded << std::endl;
+            auto decoded = coder.decode(encoded);
+            std::cout << "Decoded string is: " << decoded << std::endl;
         }
         catch (const std::exception &e) {
             std::cerr << "Error: " << e.what() << std::endl;
         }
-    }
-    deleteTree(tree);
+    }    
     return 0;
 }
