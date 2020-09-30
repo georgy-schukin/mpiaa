@@ -15,7 +15,7 @@ public:
     bool find(int elem) const;    
 
     /// Get size of the set.
-    int size() const;
+    int size() const;    
            
 private:    
     // Private members go here.
