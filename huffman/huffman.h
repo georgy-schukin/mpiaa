@@ -31,11 +31,11 @@ struct TreeNode {
 };
 
 // Build a Huffman tree from given alphabet.
-TreeNode* buildTree(const Alphabet &alphabet);
+TreeNode* getTree(const Alphabet &alphabet);
+// Build a code table from given Huffman tree.
+CodeTable getCodeTable(const TreeNode *root);
 // Destroy given Huffman tree.
 void deleteTree(const TreeNode *root);
-// Build a code table from given Huffman tree.
-CodeTable buildCodeTable(const TreeNode *root);
 
 // Coder to encode/decode strings using Huffman codes.
 class HuffmanCoder {
@@ -47,7 +47,7 @@ public:
     HuffmanCode encode(const std::string &str);
     std::string decode(const HuffmanCode &code);
 
-    const CodeTable& getCodeTable() const {
+    const CodeTable& codeTable() const {
         return code_table;
     }
 
