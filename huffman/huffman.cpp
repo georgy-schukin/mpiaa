@@ -25,7 +25,7 @@ TreeNode* buildTree(const Alphabet &alphabet) {
     return nullptr;
 }
 
-void deleteTree(TreeNode *root) {
+void deleteTree(const TreeNode *root) {
     if (!root) {
         return;
     }
@@ -38,9 +38,27 @@ void deleteTree(TreeNode *root) {
     delete root;
 }
 
+void addToCodeTable(const TreeNode *tree, CodeTable &table, const HuffmanCode &code) {
+    if (!tree) {
+        return;
+    }
+    if (tree->isLeaf()) {
+        table[tree->symbol] = code;
+        return;
+    }
+    addToCodeTable(tree->left, table, code + '0');
+    addToCodeTable(tree->right, table, code + '1');
+}
+
+CodeTable buildCodeTable(const TreeNode *root) {
+    CodeTable table;
+    addToCodeTable(root, table, "");
+    return table;
+}
+
 HuffmanCoder::HuffmanCoder(const Alphabet &alphabet) {
     tree = buildTree(alphabet);
-    code_table = getCodeTable(tree);
+    code_table = buildCodeTable(tree);
 }
 
 HuffmanCoder::HuffmanCoder(const std::string &text) :
@@ -93,20 +111,3 @@ std::string HuffmanCoder::decode(const HuffmanCode &code) {
     return result;
 }
 
-void addToCodeTable(const TreeNode *tree, CodeTable &table, const HuffmanCode &code) {
-    if (!tree) {
-        return;
-    }
-    if (tree->isLeaf()) {
-        table[tree->symbol] = code;
-        return;
-    }
-    addToCodeTable(tree->left, table, code + '0');
-    addToCodeTable(tree->right, table, code + '1');
-}
-
-CodeTable HuffmanCoder::getCodeTable(const TreeNode *root) {
-    CodeTable table;
-    addToCodeTable(root, table, "");
-    return table;
-}
