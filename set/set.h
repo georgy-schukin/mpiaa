@@ -19,4 +19,5 @@ public:
            
 private:    
     // Private members go here.
+    struct TreeNode *root = nullptr;
 };
