@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include <vector>
+#include <list>
 
 using HashFunction = std::function<int(const std::string&)>;
 
@@ -25,7 +26,8 @@ public:
 
 private:    
     using KeyValue = std::pair<std::string, std::string>; 
-    std::vector<std::vector<KeyValue>> table;
+
+    std::vector<std::list<KeyValue>> table;
 
     HashFunction hash_function;    
     
