@@ -1,8 +1,6 @@
-#define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
+#include "../catch.hpp"
 
-#include "catch.hpp"
-
-#include "dict.h"
+#include "dictionary.h"
 
 TEST_CASE( "Empty dictionary" ) {
     Dictionary d;
@@ -76,4 +74,17 @@ TEST_CASE( "Same first letter" ) {
     CHECK( d.get("hello") == "hola" );
     CHECK( d.get("house") == "casa" );
     CHECK( d.get("human") == "humano" );
+}
+
+TEST_CASE( "User hash function" ) {    
+    auto my_hash = [](const std::string &s) { return s.size(); };
+    Dictionary d(10, my_hash);
+    d.set("s1", "Short string");
+    d.set("s2", "Another short string");
+    d.set("long", "Long string");    
+    d.set("long", "Longer string");    
+    d.set("long long long", "Very very long string");    
+    CHECK( d.size() == 4 );
+    CHECK( d.get("s2") == "Another short string" );    
+    CHECK( d.get("long long long") == "Very very long string" );
 }

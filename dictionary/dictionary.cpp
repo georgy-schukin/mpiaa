@@ -1,13 +1,10 @@
-#include "dict.h"
+#include "dictionary.h"
 
-// Methods to implement
-
-Dictionary::Dictionary() {
-    // Create inner data structures here.
+Dictionary::Dictionary(int num_of_buckets, HashFunction hash) : 
+table(num_of_buckets), hash_function(hash) {    
 }
 
 Dictionary::~Dictionary() {
-    // Delete inner data structures here.
 }
 
 void Dictionary::set(const std::string &key, const std::string &value) {
@@ -22,6 +19,11 @@ std::string Dictionary::get(const std::string &key) const {
 }
 
 int Dictionary::size() const {
-    // Return size of the dictionary, i.e. number of key-value pairs.
-    return 0;
+    // Return size of the dictionary, i.e. number of key-value pairs.    
+    int size = 0;
+    for (const auto &bucket: table) {
+    	size += bucket.size();    	
+    }
+    return size;
 }
+
