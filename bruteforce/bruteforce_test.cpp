@@ -3,104 +3,46 @@
 #include "bruteforce.h"
 #include "sha256.h"
 
-#include <set>
-
-namespace {
-    template <class T>
-    void check_matched(const typename std::vector<T> &result, const typename std::vector<T> &expected) {
-        CHECK ( result.size() == expected.size() );             
-        // Sort and remove duplicates by converting to sets.
-        typename std::set<T> result_s(result.begin(), result.end());
-        typename std::set<T> expected_s(expected.begin(), expected.end());
-        CHECK ( result_s == expected_s );
-    }
-}
-
-TEST_CASE( "No symbols", "[all_words]" ) {
-    check_matched(all_words("", 1), {});
-}
-
-TEST_CASE( "Zero max length", "[all_words]" ) {
-    check_matched(all_words("a", 0), {});
-}
-
-TEST_CASE( "No symbols and zero max length", "[all_words]" ) {
-    check_matched(all_words("", 0), {});
-}
-
-TEST_CASE( "One symbol size 1", "[all_words]" ) {
-    check_matched(all_words("a", 1), {"a"});
-}
-
-TEST_CASE( "One symbol size 2", "[all_words]" ) {
-    check_matched(all_words("a", 2), {"a", "aa"});
-}
-
-TEST_CASE( "One symbol size 3", "[all_words]" ) {
-    check_matched(all_words("a", 3), {"a", "aa", "aaa"});
-}
-
-TEST_CASE( "Two symbols size 1", "[all_words]" ) {
-    check_matched(all_words("ab", 1), {"a", "b"});
-}
-
-TEST_CASE( "Two symbols size 2", "[all_words]" ) {
-    check_matched(all_words("ab", 2), {"a", "b", "aa", "ab", "ba", "bb"});
-}
-
-TEST_CASE( "Two symbols size 3", "[all_words]" ) {
-    check_matched(all_words("ab", 3), {"a", "b", 
-                                        "aa", "ab", "ba", "bb", 
-                                        "aaa", "aab", "aba", "abb", "baa", "bab", "bba", "bbb"});
-}
-
-TEST_CASE( "Three symbols size 1", "[all_words]" ) {
-    check_matched(all_words("abc", 1), {"a", "b", "c"});
-}
-
-TEST_CASE( "Three symbols size 2", "[all_words]" ) {
-    check_matched(all_words("abc", 2), {"a", "b", "c", 
-                                         "aa", "ab", "ac", "ba", "bb", "bc", "ca", "cb", "cc"});
-}
-
-TEST_CASE( "Three symbols size 3", "[all_words]" ) {
-    check_matched(all_words("abc", 3), {"a", "b", "c", 
-                                         "aa", "ab", "ac", "ba", "bb", "bc", "ca", "cb", "cc",
-                                         "aaa", "aab", "aac", "aba", "abb", "abc", "aca", "acb", "acc",
-                                         "baa", "bab", "bac", "bba", "bbb", "bbc", "bca", "bcb", "bcc",
-                                         "caa", "cab", "cac", "cba", "cbb", "cbc", "cca", "ccb", "ccc"});
-}
 
 TEST_CASE( "Empty alphabet", "[bruteforce]" ) {
-    CHECK( bruteforce("", 1, sha256("hello")) == "" );
+    CHECK( bruteforce(sha256("hello"), "", 1) == "" );
 }
 
 TEST_CASE( "Zero length password", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 0, sha256("hello")) == "" );
+    CHECK( bruteforce(sha256("hello"), "abc", 0) == "" );
 }
 
 TEST_CASE( "Password max length 1", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 1, sha256("b")) == "b" );
+    CHECK( bruteforce(sha256("b"), "abc", 1) == "b" );
+    CHECK( bruteforce(sha256("d"), "abc", 1) == "" );
 }
 
 TEST_CASE( "Password max length 2", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 2, sha256("ab")) == "ab" );
-    CHECK( bruteforce("abc", 2, sha256("c")) == "c" );
+    CHECK( bruteforce(sha256("ab"), "abc", 2) == "ab" );
+    CHECK( bruteforce(sha256("c"), "abc", 2) == "c" );
+    CHECK( bruteforce(sha256("d"), "abc", 2) == "" );
 }
 
 TEST_CASE( "Password max length 3", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 3, sha256("bac")) == "bac" );
-    CHECK( bruteforce("abc", 3, sha256("ba")) == "ba" );
-    CHECK( bruteforce("abc", 3, sha256("a")) == "a" );
+    CHECK( bruteforce(sha256("bac"), "abc", 3) == "bac" );
+    CHECK( bruteforce(sha256("ba"), "abc", 3) == "ba" );
+    CHECK( bruteforce(sha256("aba"), "abc", 3) == "aba" );
+    CHECK( bruteforce(sha256("a"), "abc", 3) == "a" );
+    CHECK( bruteforce(sha256("bad"), "abc", 3) == "" );
 }
 
 TEST_CASE( "Missing symbols in alphabet", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 3, sha256("daddy")) == "" );
-    CHECK( bruteforce("abc", 3, sha256("$#!")) == "" );
+    CHECK( bruteforce(sha256("daddy"), "abc", 3) == "" );
+    CHECK( bruteforce(sha256("$#!"), "abc", 3) == "" );
 }
 
 TEST_CASE( "Max length is too small", "[bruteforce]" ) {
-    CHECK( bruteforce("abc", 3, sha256("baca")) == "" );
-    CHECK( bruteforce("abc", 2, sha256("cba")) == "" );
+    CHECK( bruteforce(sha256("baca"), "abc", 3) == "" );
+    CHECK( bruteforce(sha256("cba"), "abc", 2) == "" );
+}
+
+TEST_CASE( "Small alphabet", "[bruteforce]" ) {
+    CHECK( bruteforce(sha256("ddd"), "d", 4) == "ddd" );
+    CHECK( bruteforce(sha256("dcd"), "d", 3) == "" );
 }
 
