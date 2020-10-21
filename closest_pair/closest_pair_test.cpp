@@ -53,6 +53,12 @@ TEST_CASE( "Duplicate points" ) {
     	Point(2, 3), Point(2, 3), Point(3, 4)})) == make_pair(Point(2, 3), Point(2, 3)) );
 }
 
+TEST_CASE( "Same x coordinate" ) {    
+    CHECK( ordered(closest_pair({
+        Point(2, 9), Point(2, 4), 
+        Point(2, 1), Point(2, -8)})) == make_pair(Point(2, 1), Point(2, 4)) );
+}
+
 TEST_CASE( "Many points" ) {
     CHECK( ordered(closest_pair({
     	Point(2, 3), Point(0, 4), Point(11, 9), Point(2, 8),
