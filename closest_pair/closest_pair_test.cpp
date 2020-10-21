@@ -73,8 +73,8 @@ TEST_CASE( "Negative points" ) {
 
 TEST_CASE( "Closest points are from stripe" ) {
     CHECK( ordered(closest_pair({
-        Point(-1, 20), Point(-2, 10), Point(-3, -10), Point(-4, -20),
-        Point(-10, 20), Point(-12, 10), Point(-13, -10), Point(-14, -20),
-        Point(1, 21), Point(2, 11), Point(3, -9), Point(4, -19),
-        Point(10, 21), Point(12, 11), Point(13, -9), Point(14, -19)})) == make_pair(Point(-1, 20), Point(1, 21)) );
+        Point(-1, 20), Point(-1.5, 10), Point(-2, -10), Point(-2.7, -20),
+        Point(-10, 20), Point(-10.5, 10), Point(-11.7, -10), Point(-12.2, -20),
+        Point(1, 21), Point(1.5, 11), Point(2, -9), Point(2.7, -19),
+        Point(10, 21), Point(10.5, 11), Point(11.7, -9), Point(12.2, -19)})) == make_pair(Point(-1, 20), Point(1, 21)) );
 }
