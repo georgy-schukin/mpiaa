@@ -3,14 +3,24 @@
 #include "activities.h"
 
 #include <set>
+#include <sstream>
 
-// Convert activities to set of vectors for equality comparison and pretty printing.
-std::set<std::vector<int>> to_set(const std::vector<Activity> &acts) {
-    std::set<std::vector<int>> s;
-    for (const auto &a: acts) {
-        s.insert(std::vector<int>({a.start, a.finish}));
-    }
-    return s; 
+using namespace std;
+
+namespace Catch {
+    template<> 
+    struct StringMaker<Activity> {
+        static string convert(const Activity &a) {
+            ostringstream out;
+            out << "{" << a.start << ", " << a.finish << "}";
+            return out.str();
+        } 
+    };    
+}
+
+// Convert vector of activities to set for equality comparison.
+set<Activity> to_set(const vector<Activity> &acts) {
+    return set<Activity>(acts.begin(), acts.end());    
 }
 
 TEST_CASE( "Empty", "[activity]" ) {
