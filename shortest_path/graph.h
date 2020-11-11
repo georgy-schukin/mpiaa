@@ -2,12 +2,17 @@
 
 #include <map>
 #include <vector>
+#include <tuple>
+#include <initializer_list>
 
 /**
  * Non-oriented weighted graph.
 **/
 class Graph {
 public:
+    Graph() {}
+    Graph(std::initializer_list<std::tuple<int, int, double>> edges);
+
     /// Add single vertex to the graph.
     void add_vertex(int vertex);
 

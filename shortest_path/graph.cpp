@@ -4,6 +4,12 @@
 
 using namespace std;
 
+Graph::Graph(initializer_list<tuple<int, int, double>> edges) {
+    for (const auto &e: edges) {
+        add_edge(get<0>(e), get<1>(e), get<2>(e));            
+    }
+}
+
 void Graph::add_vertex(int vertex) {
     if (!has_vertex(vertex)) {
         vertices[vertex] = std::map<int, double>();
