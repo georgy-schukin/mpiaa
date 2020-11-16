@@ -62,8 +62,8 @@ TEST_CASE( "Five activities", "[activity]" ) {
 
 TEST_CASE( "Big one", "[activity]" ) {
     const auto answer = to_set(get_max_activities({ {3, 5}, {1, 4}, {5, 7}, {0, 6},
-                                                    {3, 9}, {5, 9}, {8, 11}, {6, 10},
+                                                    {3, 9}, {5, 9}, {6, 11}, {4, 10},
                                                     {8, 12}, {2, 14}, {12, 16} }));
-    CHECK( (answer == to_set({ {1, 4}, {5, 7}, {8, 11}, {12, 16} }) ||
+    CHECK( (answer == to_set({ {1, 4}, {5, 7}, {8, 12}, {12, 16} }) ||
               answer == to_set({ {3, 5}, {5, 7}, {8, 12}, {12, 16}})) );
 }
