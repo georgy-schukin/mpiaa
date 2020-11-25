@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// For a circilar path get its reverse.
+// Get path (tour) in reversed direction.
 vector<int> reversed(const vector<int> &path) {
     if (path.empty()) {
         return vector<int> {};
@@ -15,7 +15,7 @@ vector<int> reversed(const vector<int> &path) {
     return result;
 }
 
-// From two possible directions for a circlular path choose one with min second vertex.
+// From two possible directions for a path (tour) choose one with min second vertex.
 vector<int> min_dir(const vector<int> &path) {
     if (path.size() <= 1) {
         return path;
