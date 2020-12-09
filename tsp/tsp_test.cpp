@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Get path (tour) in reversed direction.
+// For a circilar path get its reverse.
 vector<int> reversed(const vector<int> &path) {
     if (path.empty()) {
         return vector<int> {};
@@ -15,7 +15,7 @@ vector<int> reversed(const vector<int> &path) {
     return result;
 }
 
-// From two possible directions for a path (tour) choose one with min second vertex.
+// From two possible directions for a circlular path choose one with min second vertex.
 vector<int> min_dir(const vector<int> &path) {
     if (path.size() <= 1) {
         return path;
@@ -44,6 +44,15 @@ TEST_CASE( "[TSP] Three vertices, three edges", "[tsp]" ) {
     Graph g {{0, 1, 2.5}, {0, 2, 0.5}, {1, 2, 1.0}};
     const auto result = tsp(g, 0);  
     const auto expected = vector<int> {0, 1, 2};  
+    CHECK( min_dir(result) == expected );
+}
+
+TEST_CASE( "[TSP] Several vertices", "[tsp]" ) {
+    Graph g {{0, 1, 6.0}, {0, 2, 4.0}, {0, 3, 1.0},
+             {1, 2, 3.5}, {1, 3, 2.0}, 
+             {2, 3, 5.0}};
+    const auto result = tsp(g, 0);
+    const auto expected = vector<int> {0, 2, 1, 3};
     CHECK( min_dir(result) == expected );
 }
 
