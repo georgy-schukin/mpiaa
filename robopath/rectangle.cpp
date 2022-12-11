@@ -11,7 +11,7 @@ Interval Rectangle::getYInterval() const {
     return Interval(topLeft.y - height, topLeft.y);
 }
 
-std::array<Point, 4> getPoints() const {
+std::array<Point, 4> Rectangle::getPoints() const {
     return std::array<Point, 4> {
         topLeft,
         Point(topLeft.x + width, topLeft.y),
@@ -20,7 +20,7 @@ std::array<Point, 4> getPoints() const {
     };
 }
 
-std::array<LineSegment, 4> getLines() const {
+std::array<LineSegment, 4> Rectangle::getLines() const {
     const auto points = getPoints();
     return std::array<LineSegment, 4> {
         LineSegment(points[0], points[1]),

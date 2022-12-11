@@ -30,7 +30,7 @@ bool Triangle::collidesWith(const Rectangle &r) const {
         }
     }
     for (const auto &line: getLines()) {
-        if (line.Intersects(r)) {
+        if (line.collidesWith(r)) {
             return true;
         }
     }

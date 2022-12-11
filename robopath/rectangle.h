@@ -1,3 +1,5 @@
+#pragma once
+
 #include "point.h"
 #include "interval.h"
 #include "line_segment.h"

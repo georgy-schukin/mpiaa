@@ -2,6 +2,8 @@
 #include "objects.h"
 #include "util.h"
 
+#include <utility>
+
 namespace robopath {
 
 double LineSegment::length() const {
@@ -39,10 +41,10 @@ bool LineSegment::collidesWith(const LineSegment &ls) const {
             return false; // parallel non-intersecting lines
         }
         const auto dotAB = Vector::dot(A, B, A, B); // AB dot AB
-        const auto t0 = Vector::dot(A, C, A, B) / dotAB; // AC dot AB / AB dot AB
-        const auto t1 = t0 + Vector::dot(C, D, A, B) / dotAB; // t0 + CD dot AB / AB dot AB
+        auto t0 = Vector::dot(A, C, A, B) / dotAB; // AC dot AB / AB dot AB
+        auto t1 = t0 + Vector::dot(C, D, A, B) / dotAB; // t0 + CD dot AB / AB dot AB
         if (t1 < t0) {
-            (t0, t1) = (t1, t0);
+        	std::swap(t0, t1);
         }
         return Interval::intervalsIntersect(t0, t1, 0.0, 1.0);
     }

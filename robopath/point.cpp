@@ -16,7 +16,6 @@ double Point::distanceToSquared(const Point &p) const {
 
 bool Point::collidesWith(const Point &p) const {
 	return areEqual(x, p.x) && areEqual(y, p.y);
-
 }
 
 bool Point::collidesWith(const LineSegment &ls) const {
@@ -45,8 +44,8 @@ bool Point::collidesWith(const Circle &c) const {
 }
 
 bool Point::collidesWith(const Rectangle &r) const {
-	return r.getXInterval().Includes(x) && 
-			r.getYInterval().Includes(y);
+	return r.getXInterval().includes(x) && 
+			r.getYInterval().includes(y);
 }
 
 bool Point::collidesWith(const Triangle &t) const {

@@ -56,7 +56,7 @@ double Vector::angleBetween(const Vector &otherVector) const {
 }
 
 double Vector::angleBetween(double vx, double vy) const {
-    return Vector::AngleBetween(x, y, vx, vy);
+    return Vector::angleBetween(x, y, vx, vy);
 }
 
 double Vector::cross(const Vector &v1, const Vector &v2) {

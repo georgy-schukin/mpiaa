@@ -10,7 +10,9 @@ class Triangle;
 class Point {
 public:
 	Point() {}
-	Point(double x, double y) {}	
+	Point(double x, double y):
+		x(x), y(y) {			
+	}	
 
 	double distanceTo(const Point &p) const;
 	double distanceToSquared(const Point &p) const;
