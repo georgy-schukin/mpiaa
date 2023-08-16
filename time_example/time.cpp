@@ -6,8 +6,11 @@
 #include <cstdlib>
 #include <cmath>
 
-std::vector<int> gen_random_array(int size) {
-	std::vector<int> result(size);
+using namespace std;
+using namespace std::chrono;
+
+vector<int> gen_random_array(int size) {
+	vector<int> result(size);
 	for (int i = 0; i < size; i++) {
 		result[i] = rand();		
 	}
@@ -15,19 +18,19 @@ std::vector<int> gen_random_array(int size) {
 }
 
 void measure(int size) {	
-	std::vector<int> data = gen_random_array(size);
+	auto data = gen_random_array(size);
 	
-	auto t1 = std::chrono::high_resolution_clock::now();
-	std::sort(data.begin(), data.end());
-	auto t2 = std::chrono::high_resolution_clock::now();	
+	auto t1 = steady_clock::now();
+	sort(data.begin(), data.end());
+	auto t2 = steady_clock::now();	
 	
-	double time = std::chrono::duration<double>(t2 - t1).count();	
+	auto time = duration<double>(t2 - t1).count();	
     
-    std::cout << "N: " << size << ", time: " << time << std::endl;
+    cout << "N: " << size << ", time: " << time << endl;
 }
 
 int main(int argc, char **argv) {
-    int max_pow = argc > 1 ? std::stoi(argv[1]) : 6;
+    int max_pow = argc > 1 ? stoi(argv[1]) : 6;
     
 	for (int i = 1; i <= max_pow; i++) {
 		measure(pow(10, i));
